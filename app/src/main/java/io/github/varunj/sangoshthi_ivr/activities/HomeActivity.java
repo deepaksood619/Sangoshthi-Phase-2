@@ -96,7 +96,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_host_show:
-                Intent intentHostShow = new Intent(this, HostShowActivity.class);
+                Intent intentHostShow = new Intent(this, SelectionActivity.class);
                 startActivity(intentHostShow);
                 break;
 
