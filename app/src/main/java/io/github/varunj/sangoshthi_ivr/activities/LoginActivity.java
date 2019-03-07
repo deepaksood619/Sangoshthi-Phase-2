@@ -119,8 +119,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void startLoginProcess() {
-        final EditText etPhone = (EditText) findViewById(R.id.et_phone);
-        Button btnSignIn = (Button) findViewById(R.id.btn_sign_in);
+        final EditText etPhone = findViewById(R.id.et_phone);
+        Button btnSignIn = findViewById(R.id.btn_sign_in);
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override

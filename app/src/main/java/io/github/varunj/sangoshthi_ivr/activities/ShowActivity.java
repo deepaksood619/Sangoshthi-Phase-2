@@ -72,28 +72,28 @@ public class ShowActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show);
 
-        tvNumOfListeners = (TextView) findViewById(R.id.tv_num_of_listeners);
+        tvNumOfListeners = findViewById(R.id.tv_num_of_listeners);
         tvNumOfListeners.setText(getString(R.string.tv_num_of_listeners, 0, SharedPreferenceManager.getInstance().getCohortSize()));
 
-        chronometerShow = (Chronometer) findViewById(R.id.chronometer_show);
+        chronometerShow = findViewById(R.id.chronometer_show);
         chronometerShow.start();
 
-        showEndShow = (ImageButton) findViewById(R.id.show_end_show);
+        showEndShow = findViewById(R.id.show_end_show);
         showEndShow.setOnClickListener(this);
 
-        showPlayPause = (Button) findViewById(R.id.show_play_pause);
+        showPlayPause = findViewById(R.id.show_play_pause);
         showPlayPause.setOnClickListener(this);
 
-        btnPreviousContent = (ImageButton) findViewById(R.id.btn_previous_content);
+        btnPreviousContent = findViewById(R.id.btn_previous_content);
         btnPreviousContent.setOnClickListener(this);
 
-        btnNextContent = (ImageButton) findViewById(R.id.btn_next_content);
+        btnNextContent = findViewById(R.id.btn_next_content);
         btnNextContent.setOnClickListener(this);
 
-        llMediaControls = (RelativeLayout) findViewById(R.id.ll_media_controls);
-        tvMediaName = (TextView) findViewById(R.id.tv_media_name);
+        llMediaControls = findViewById(R.id.ll_media_controls);
+        tvMediaName = findViewById(R.id.tv_media_name);
 
-        rvListenersContent = (RecyclerView) findViewById(R.id.rv_listeners_content);
+        rvListenersContent = findViewById(R.id.rv_listeners_content);
 
         callerStateModelList = new ArrayList<>();
 
@@ -143,7 +143,7 @@ public class ShowActivity extends AppCompatActivity implements View.OnClickListe
                             break;
 
                         default:
-                            Log.d(TAG, "objective not matched: " + jsonObject.toString());
+                            Log.e(TAG, "objective not matched in ShowActivity" + jsonObject.toString());
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -125,7 +125,7 @@ public class TutorialsActivity extends AppCompatActivity {
             tutorialList = gson.fromJson(json, type);
         }
 
-        rvTutorials = (RecyclerView) findViewById(R.id.rv_tutorials);
+        rvTutorials = findViewById(R.id.rv_tutorials);
         mAdapter = new TutorialsRecyclerViewAdapter(this, tutorialList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         rvTutorials.setLayoutManager(layoutManager);

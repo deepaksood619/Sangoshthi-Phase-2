@@ -54,11 +54,11 @@ public class HostShowActivity extends AppCompatActivity {
 
         this.context = this;
 
-        tvShowTopic = (TextView) findViewById(R.id.tv_show_topic);
-        tvShowDateOfAiring = (TextView) findViewById(R.id.tv_show_date_of_airing);
-        tvShowTimeOfAiring = (TextView) findViewById(R.id.tv_show_time_of_airing);
-        llStartShow = (LinearLayout) findViewById(R.id.ll_start_show);
-        tvChronometerStartShow = (TextView) findViewById(R.id.tv_chronometer_start_show);
+        tvShowTopic = findViewById(R.id.tv_show_topic);
+        tvShowDateOfAiring = findViewById(R.id.tv_show_date_of_airing);
+        tvShowTimeOfAiring = findViewById(R.id.tv_show_time_of_airing);
+        llStartShow = findViewById(R.id.ll_start_show);
+        tvChronometerStartShow = findViewById(R.id.tv_chronometer_start_show);
 
         final Handler incomingMessageHandler = new Handler() {
             @Override

@@ -10,6 +10,7 @@
     <string name="btn_cancel">Cancel</string>
     <string name="btn_no">NO</string>
     <string name="btn_ok">OK</string>
+    <string name="btn_show_feedback">Feeback</string>
     <string name="btn_show_play_pause_content_pause">Pause Content</string>
     <string name="btn_show_play_pause_content_play">Play Content</string>
     <string name="btn_show_play_pause_content_resume">Resume Content</string>
@@ -38,6 +39,7 @@
     <string name="dialog_box_end_show_title">End Show</string>
     <string name="dialog_box_update_show_status_message">If you are ready for the next show, then press yes. Otherwise press no.</string>
     <string name="dialog_box_update_show_status_title">Show End Confirmation</string>
+    <string name="dialog_box_feedback_show_status_title">Have you completed the show?</string>
     <string name="dummy_phone_num">0123456789</string>
     <string name="error_phone_not_registered">Phone not registered</string>
     <string name="home_help">TUTORIALS</string>
@@ -52,6 +54,8 @@
     <string name="placeholder_tv_show_topic">Coming Soon</string>
     <string name="placeholder_tv_tutorial">Tutorial</string>
     <string name="placeholder_tv_media_name">Media name</string>
+    <string name="placeholder_tv_file_name">file_name.mp4</string>
+    <string name="placeholder_localized_show_name">Test Show</string>
     <string name="progress_dialog_calling_broadcaster">Calling</string>
     <string name="progress_dialog_please_wait">Please Wait</string>
     <string name="progress_dialog_reconnecting_call">Reconnecting Call</string>

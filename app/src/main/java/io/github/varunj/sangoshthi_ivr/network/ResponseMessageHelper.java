@@ -117,9 +117,14 @@ public class ResponseMessageHelper {
 
                 case "upcoming_show_list_data":
                     sendCallbackToActivity(message);
+                    break;
+
+                case "get_final_feedback_for_show_ack":
+                    sendCallbackToActivity(message);
+                    break;
 
                 default:
-                    Log.e(TAG, "Objective not matched " + message.toString());
+                    Log.e(TAG, "Objective not matched in ResponseMessageHelper" + message.toString());
             }
         } catch (JSONException e) {
             Log.e(TAG, e.getMessage());

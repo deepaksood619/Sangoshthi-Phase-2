@@ -32,9 +32,9 @@ public class NotificationsRecyclerViewAdapter extends RecyclerView.Adapter<Notif
 
         MyViewHolder(View itemView) {
             super(itemView);
-            tvNotification = (TextView) itemView.findViewById(R.id.tv_notification);
-            tvNotificationDate = (TextView) itemView.findViewById(R.id.tv_notification_date);
-            cvNotification = (CardView) itemView.findViewById(R.id.cv_notification);
+            tvNotification = itemView.findViewById(R.id.tv_notification);
+            tvNotificationDate = itemView.findViewById(R.id.tv_notification_date);
+            cvNotification = itemView.findViewById(R.id.cv_notification);
         }
     }
 

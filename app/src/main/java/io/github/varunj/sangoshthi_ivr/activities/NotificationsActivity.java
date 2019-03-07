@@ -53,7 +53,7 @@ public class NotificationsActivity extends AppCompatActivity {
 
         LoadingUtil.getInstance().showLoading(getString(R.string.progress_dialog_please_wait), NotificationsActivity.this);
 
-        ivNoNotifications = (ImageView) findViewById(R.id.iv_no_notifications);
+        ivNoNotifications = findViewById(R.id.iv_no_notifications);
 
         final Handler incomingMessageHandler = new Handler() {
             @Override
@@ -68,7 +68,7 @@ public class NotificationsActivity extends AppCompatActivity {
                             break;
 
                         default:
-                            Log.d(TAG, "objective not matched " + jsonObject.toString());
+                            Log.e(TAG, "objective not matched in NotificationsActivity" + jsonObject.toString());
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -81,7 +81,7 @@ public class NotificationsActivity extends AppCompatActivity {
 
         notificationModelList = new ArrayList<>();
 
-        rvNotifications = (RecyclerView) findViewById(R.id.rv_notifications);
+        rvNotifications = findViewById(R.id.rv_notifications);
         mAdapter = new NotificationsRecyclerViewAdapter(this, notificationModelList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         rvNotifications.setLayoutManager(layoutManager);

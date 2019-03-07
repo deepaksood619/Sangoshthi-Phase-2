@@ -91,7 +91,10 @@ public class RequestMessageHelper {
         }
     }
 
-
+    /**
+     * Request - {"objective":"get_final_feedback_for_show","broadcaster":"7011030818","cohort_id":"15","timestamp":"2019-03-07 22:12:08","update":"yes","show_id":"show_32"}
+     * Response - {"objective":"get_final_feedback_for_show_ack","show_id":"show_32"}
+     */
     public void getFinalFeedbackForShow() {
         JSONObject jsonObject = new JSONObject();
         try {

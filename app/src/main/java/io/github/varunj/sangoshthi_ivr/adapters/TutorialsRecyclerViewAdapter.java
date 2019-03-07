@@ -40,9 +40,9 @@ public class TutorialsRecyclerViewAdapter extends RecyclerView.Adapter<Tutorials
 
         MyViewHolder(View itemView) {
             super(itemView);
-            cvTutorial = (CardView) itemView.findViewById(R.id.cv_tutorial);
-            tvTutorial = (TextView) itemView.findViewById(R.id.tv_tutorial);
-            ivLockUnlock = (ImageView) itemView.findViewById(R.id.iv_lock_unlock);
+            cvTutorial = itemView.findViewById(R.id.cv_tutorial);
+            tvTutorial = itemView.findViewById(R.id.tv_tutorial);
+            ivLockUnlock = itemView.findViewById(R.id.iv_lock_unlock);
         }
     }
 

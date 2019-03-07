@@ -43,12 +43,12 @@ public class ListenersRecyclerViewAdapter extends RecyclerView.Adapter<Listeners
 
         MyViewHolder(View itemView) {
             super(itemView);
-            cvListenerItemRow = (CardView) itemView.findViewById(R.id.cv_listener_item_row);
-            tvListenerNumber = (TextView) itemView.findViewById(R.id.tv_listener_number);
-            ivMuteUnmute = (ImageButton) itemView.findViewById(R.id.iv_mute_unmute);
-            ivQuestion = (ImageButton) itemView.findViewById(R.id.iv_question);
-            ivReconnection = (ImageView) itemView.findViewById(R.id.iv_reconnection);
-            chronometerListenerItem = (Chronometer) itemView.findViewById(R.id.chronometer_listener_item);
+            cvListenerItemRow = itemView.findViewById(R.id.cv_listener_item_row);
+            tvListenerNumber = itemView.findViewById(R.id.tv_listener_number);
+            ivMuteUnmute = itemView.findViewById(R.id.iv_mute_unmute);
+            ivQuestion = itemView.findViewById(R.id.iv_question);
+            ivReconnection = itemView.findViewById(R.id.iv_reconnection);
+            chronometerListenerItem = itemView.findViewById(R.id.chronometer_listener_item);
         }
     }
 

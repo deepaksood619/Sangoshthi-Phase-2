@@ -45,13 +45,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         intentFilter.addAction("android.intent.action.PHONE_STATE");
         registerReceiver(callReceiver, intentFilter);
 
-        btnHostShow = (Button) findViewById(R.id.btn_host_show);
+        btnHostShow = findViewById(R.id.btn_host_show);
         btnHostShow.setOnClickListener(this);
 
-        btnHomeNotifications = (Button) findViewById(R.id.btn_notifications);
+        btnHomeNotifications = findViewById(R.id.btn_notifications);
         btnHomeNotifications.setOnClickListener(this);
 
-        btnTutorials = (Button) findViewById(R.id.btn_tutorials);
+        btnTutorials = findViewById(R.id.btn_tutorials);
         btnTutorials.setOnClickListener(this);
     }
 
