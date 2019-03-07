@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -45,13 +46,18 @@ public class ShowListRecyclerViewAdapter extends RecyclerView.Adapter<ShowListRe
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.tvLocalizedShowName.setText(showModelList.get(position).getLocal_name());
 
-        holder.btnStartShow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, HostShowActivity.class);
-                context.startActivity(intent);
-            }
-        });
+        if (position == 0) {
+            holder.btnStartShow.setEnabled(true);
+            holder.btnStartShow.setBackgroundColor(ContextCompat.getColor(context, R.color.colorGreen));
+
+            holder.btnStartShow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, HostShowActivity.class);
+                    context.startActivity(intent);
+                }
+            });
+        }
 
         holder.btnShowFeedback.setOnClickListener(new View.OnClickListener() {
             @Override

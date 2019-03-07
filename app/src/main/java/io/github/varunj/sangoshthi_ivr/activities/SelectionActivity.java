@@ -15,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 
 import io.github.varunj.sangoshthi_ivr.R;
@@ -97,6 +98,9 @@ public class SelectionActivity extends AppCompatActivity {
                 showModelArrayList.add(newShow);
             }
         }
+
+        Collections.sort(showModelArrayList);
+        Log.d(TAG, "sorted showModelArrayList " + showModelArrayList);
 
         if (showModelArrayList.size() > 0) {
             tvNoShow.setVisibility(View.INVISIBLE);
