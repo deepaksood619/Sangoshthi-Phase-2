@@ -6,51 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".activities.SelectionActivity">
 
-    <Button
-        android:id="@+id/btn_host_show_1"
-        android:layout_width="370dp"
-        android:layout_height="60dp"
-        android:text="Show I"
-        app:layout_constraintBottom_toTopOf="@+id/btn_host_show_2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <Button
-        android:id="@+id/btn_host_show_2"
-        android:layout_width="370dp"
-        android:layout_height="60dp"
-        android:text="Show II"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_host_show_1" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="The buttons won't be clickable untill the previous feedbacks have been completed"
-        android:textAlignment="center"
-        android:textColor="@color/colorRed"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_host_show_2" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Select the video session to be played"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/btn_host_show_1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_show_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:padding="5dp"
+        android:scrollbars="vertical"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </android.support.constraint.ConstraintLayout>

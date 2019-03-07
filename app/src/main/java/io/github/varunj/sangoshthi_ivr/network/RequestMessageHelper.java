@@ -24,7 +24,7 @@ public class RequestMessageHelper {
     }
 
     public static synchronized RequestMessageHelper getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new RequestMessageHelper();
         }
         return instance;
@@ -34,7 +34,7 @@ public class RequestMessageHelper {
 
     /**
      * App install
-     *
+     * <p>
      * Request - {"objective" : "app_install_notify", "broadcaster" : “9716517818”, “timestamp” : “2017-06-15 18:00:00” }
      * Response - {"objective" : "ack", "info" : “2” } // cohort id
      * Response - {"objective" : "ack", "info" : “-1” } // in case fetching of cohort id failed
@@ -55,10 +55,9 @@ public class RequestMessageHelper {
 
     /**
      * Get Upcoming Show Data (Host Show)
-     *
+     * <p>
      * Request - {"objective" : "get_upcoming_show", "broadcaster" : "9716517818", "cohort_id" : "3", "timestamp" : "erfs" }
      * Response - {"objective": "upcoming_show_data", "show_id": "show_3", "time_of_airing": "2017-06-15 18:00:00", "topic": "play and communication"}'
-     *
      */
     public void getUpcomingShow() {
         JSONObject jsonObject = new JSONObject();
@@ -74,11 +73,47 @@ public class RequestMessageHelper {
     }
 
     /**
+     * Get upcoming show data list
+     * <p>
+     * Request - {"objective":"get_upcoming_show_list","broadcaster":"7011030818","cohort_id":"15","timestamp":"2019-03-07 12:13:56"}
+     * Response - {"objective":"upcoming_show_list_data","show_34":{"topic":"Women's Health","show_id":"show_34","time_of_airing":"2019-03-04 19:15:00","local_name":"महिलाओं का स्वास्थ"},"show_35":{"topic":"Pediatrician","show_id":"show_35","time_of_airing":"2019-03-04 19:30:00","local_name":"बच्चों का चिकित्सक"},"show_32":{"topic":"Pregnancy","show_id":"show_32","time_of_airing":"2019-03-05 14:30:00","local_name":"गर्भावस्था"},"show_33":{"topic":"Menstruation","show_id":"show_33","time_of_airing":"2019-03-05 19:00:00","local_name":"माहवारी"}}
+     */
+    public void getUpcomingShowList() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("objective", "get_upcoming_show_list");
+            jsonObject.put("broadcaster", SharedPreferenceManager.getInstance().getBroadcaster());
+            jsonObject.put("cohort_id", SharedPreferenceManager.getInstance().getCohortId());
+            jsonObject.put("timestamp", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(Calendar.getInstance().getTime()));
+            AMQPPublish.getInstance().publishMessage(jsonObject);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void getFinalFeedbackForShow() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("objective", "get_final_feedback_for_show");
+            jsonObject.put("broadcaster", SharedPreferenceManager.getInstance().getBroadcaster());
+            jsonObject.put("cohort_id", SharedPreferenceManager.getInstance().getCohortId());
+            jsonObject.put("timestamp", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(Calendar.getInstance().getTime()));
+            jsonObject.put("update", "yes");
+            jsonObject.put("show_id", SharedPreferenceManager.getInstance().getShowId());
+            AMQPPublish.getInstance().publishMessage(jsonObject);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
      * {"objective":"start_show",
-     *  "broadcaster":"8368861819",
-     *  "cohort_id":"7",
-     *  "show_id":"show_61",
-     *  "timestamp":"2018-06-14 22:54:01"
+     * "broadcaster":"8368861819",
+     * "cohort_id":"7",
+     * "show_id":"show_61",
+     * "timestamp":"2018-06-14 22:54:01"
      * }
      */
     public void startShow() {
@@ -97,11 +132,11 @@ public class RequestMessageHelper {
 
     /**
      * {"objective":"dial_listeners",
-     *  "broadcaster":"8368861819",
-     *  "cohort_id":"7",
-     *  "show_id":"show_61",
-     *  "conference_name":"show_61_2018_06_14_22_53_58",
-     *  "timestamp":"2018-06-14 22:54:11"
+     * "broadcaster":"8368861819",
+     * "cohort_id":"7",
+     * "show_id":"show_61",
+     * "conference_name":"show_61_2018_06_14_22_53_58",
+     * "timestamp":"2018-06-14 22:54:11"
      * }
      */
     public void dialListeners() {
@@ -121,15 +156,15 @@ public class RequestMessageHelper {
 
     /**
      * {"objective":"mute",
-     *  "broadcaster":"8368861819",
-     *  "cohort_id":"7",
-     *  "show_id":"show_61",
-     *  "conference_name":"show_61_2018_06_14_22_53_58",
-     *  "listener_phoneno":"9716517818",
-     *  "turn":3,"timestamp":"2018-06-14 22:55:56"
+     * "broadcaster":"8368861819",
+     * "cohort_id":"7",
+     * "show_id":"show_61",
+     * "conference_name":"show_61_2018_06_14_22_53_58",
+     * "listener_phoneno":"9716517818",
+     * "turn":3,"timestamp":"2018-06-14 22:55:56"
      * }
      *
-     *  @param listener_phoneno
+     * @param listener_phoneno
      */
     public void mute(String listener_phoneno, int turn) {
         JSONObject jsonObject = new JSONObject();
@@ -190,12 +225,12 @@ public class RequestMessageHelper {
 
     /**
      * {"objective":"pause_play_content",
-     *  "media_order":"1",
-     *  "broadcaster":"8368861819",
-     *  "cohort_id":"7",
-     *  "show_id":"show_61",
-     *  "conference_name":"show_61_2018_06_14_22_53_58",
-     *  "timestamp":"2018-06-14 22:56:06"
+     * "media_order":"1",
+     * "broadcaster":"8368861819",
+     * "cohort_id":"7",
+     * "show_id":"show_61",
+     * "conference_name":"show_61_2018_06_14_22_53_58",
+     * "timestamp":"2018-06-14 22:56:06"
      * }
      */
     public void pausePlayShowContent(int mediaOrder) {
@@ -214,17 +249,17 @@ public class RequestMessageHelper {
         }
     }
 
-     /*
-        {
-          "objective":"play_show_media",
-          "media_order":"3",
-          "type":"answer","broadcaster":"8368861819",
-          "cohort_id":"9",
-          "show_id":"show_20",
-          "conference_name":"show_20_2018_04_16_11_02_30",
-          "timestamp":"2018-04-16 11:09:56"
-        }
-     */
+    /*
+       {
+         "objective":"play_show_media",
+         "media_order":"3",
+         "type":"answer","broadcaster":"8368861819",
+         "cohort_id":"9",
+         "show_id":"show_20",
+         "conference_name":"show_20_2018_04_16_11_02_30",
+         "timestamp":"2018-04-16 11:09:56"
+       }
+    */
     public void playShowMedia(int mediaOrder, String type) {
         JSONObject jsonObject = new JSONObject();
         try {

@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.github.varunj.sangoshthi_ivr.models.CallerStateModel;
+import io.github.varunj.sangoshthi_ivr.models.ShowModel;
 import io.github.varunj.sangoshthi_ivr.models.ShowPlaybackModel;
 import io.github.varunj.sangoshthi_ivr.models.TutorialListenModel;
 
@@ -59,7 +60,9 @@ public class SharedPreferenceManager {
     private final String PREF_SHOW_SESSION_DATA = "show_session_data";
     private final String PREF_SHOW_CHRONOMETER_TIME = "show_chronometer_time";
     private final String PREF_LISTENERS_DATA = "listeners_data";
+    private final String PREF_SHOW_LIST_DATA = "show_list_data";
     private ArrayList<ShowPlaybackModel> showPlaybackModels;
+    private ArrayList<ShowModel> showModelArrayList;
 
     private SharedPreferenceManager() {
     }
@@ -291,6 +294,41 @@ public class SharedPreferenceManager {
                 return gson.fromJson(json, type);
             }
         }
+        return null;
+    }
+
+    public void setShowListData(ArrayList<ShowModel> showModelList) {
+
+        Log.d(TAG, "saving data - " + showModelList.toString());
+
+        this.showModelArrayList = showModelList;
+
+        final Gson gson = new Gson();
+
+        String json = gson.toJson(showModelList);
+
+        if (sharedPreferences != null) {
+            sharedPreferences.edit().putString(PREF_SHOW_LIST_DATA, json).apply();
+        }
+    }
+
+    public ArrayList<ShowModel> getShowListData(String show_id) {
+        if (showModelArrayList == null) {
+            final Gson gson = new Gson();
+
+            if (sharedPreferences != null) {
+                String json = sharedPreferences.getString(PREF_SHOW_LIST_DATA, "NONE");
+                Log.d(TAG, "show_list_data - " + json);
+                if (!json.equals("NONE")) {
+                    Type type = new TypeToken<List<ShowModel>>() {
+                    }.getType();
+                    return gson.fromJson(json, type);
+                }
+            }
+        } else {
+            return showModelArrayList;
+        }
+
         return null;
     }
 

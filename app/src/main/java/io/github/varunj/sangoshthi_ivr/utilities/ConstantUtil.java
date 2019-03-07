@@ -10,8 +10,12 @@ public class ConstantUtil {
     /* This will be used at AMQPPublish to setup connection factory */
 
     /* IIITD local */
-    public static final String IP_ADDR = "192.168.2.214";
-    public static final Integer SERVER_PORT = 5672;
+//    public static final String IP_ADDR = "192.168.2.214";
+//    public static final Integer SERVER_PORT = 5672;
+
+    /* New Global server */
+    public static final String IP_ADDR = "103.25.231.23";
+    public static final Integer SERVER_PORT = 5671;
 
     public static final long FIVE_SECOND_CLOCK = 5 * 1000;
     public static final long THIRTY_SECOND_CLOCK = 30 * 1000;

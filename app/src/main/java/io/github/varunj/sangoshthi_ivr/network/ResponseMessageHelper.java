@@ -115,6 +115,9 @@ public class ResponseMessageHelper {
                     handleDialListenersResponse(message);
                     break;
 
+                case "upcoming_show_list_data":
+                    sendCallbackToActivity(message);
+
                 default:
                     Log.e(TAG, "Objective not matched " + message.toString());
             }
