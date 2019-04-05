@@ -21,9 +21,8 @@ public class CallReceiver extends PhoneCallReceiver {
 
     ArrayList<String> serverNum;
 
-    @Override
-    public void onCallStateChanged(Context context, int state, String number) {
-        super.onCallStateChanged(context, state, number);
+    public void onCustomCallStateChanged(Context context, int state, String number) {
+        super.onCustomCallStateChanged(context, state, number);
 
         try {
 
@@ -77,7 +76,7 @@ public class CallReceiver extends PhoneCallReceiver {
     }
 
     private boolean isServerNumber(String incomingNumber) {
-        if(serverNum == null) {
+        if (serverNum == null) {
             serverNum = new ArrayList<>();
             serverNum.add("9643099799");
             serverNum.add("9643066633");
@@ -95,8 +94,8 @@ public class CallReceiver extends PhoneCallReceiver {
             serverNum.add("9599079805");
         }
 
-        for(String serverNumberItem : serverNum) {
-            if(incomingNumber.contains(serverNumberItem)) {
+        for (String serverNumberItem : serverNum) {
+            if (incomingNumber.contains(serverNumberItem)) {
                 return true;
             }
         }

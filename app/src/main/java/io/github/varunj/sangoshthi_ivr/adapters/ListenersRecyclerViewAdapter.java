@@ -33,25 +33,6 @@ public class ListenersRecyclerViewAdapter extends RecyclerView.Adapter<Listeners
     private List<CallerStateModel> callerStateModelList;
     private Context context;
 
-    static class MyViewHolder extends RecyclerView.ViewHolder {
-        CardView cvListenerItemRow;
-        TextView tvListenerNumber;
-        ImageButton ivMuteUnmute;
-        ImageButton ivQuestion;
-        ImageView ivReconnection;
-        Chronometer chronometerListenerItem;
-
-        MyViewHolder(View itemView) {
-            super(itemView);
-            cvListenerItemRow = itemView.findViewById(R.id.cv_listener_item_row);
-            tvListenerNumber = itemView.findViewById(R.id.tv_listener_number);
-            ivMuteUnmute = itemView.findViewById(R.id.iv_mute_unmute);
-            ivQuestion = itemView.findViewById(R.id.iv_question);
-            ivReconnection = itemView.findViewById(R.id.iv_reconnection);
-            chronometerListenerItem = itemView.findViewById(R.id.chronometer_listener_item);
-        }
-    }
-
     public ListenersRecyclerViewAdapter(Context context, List<CallerStateModel> moviesList) {
         this.context = context;
         this.callerStateModelList = moviesList;
@@ -66,9 +47,11 @@ public class ListenersRecyclerViewAdapter extends RecyclerView.Adapter<Listeners
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        holder.tvListenerNumber.setText(SharedPreferenceManager.getInstance().getListenersData(callerStateModelList.get(position).getPhoneNum()));
+        String listeners_data = SharedPreferenceManager.getInstance().getListenersData(callerStateModelList.get(position).getPhoneNum());
+        Log.d(TAG, "listeners_data" + listeners_data);
+        holder.tvListenerNumber.setText(listeners_data);
 
-        if(callerStateModelList.get(position).getTask().equals("online")) {
+        if (callerStateModelList.get(position).getTask().equals("online")) {
             // user is online show its state
             holder.cvListenerItemRow.setVisibility(View.VISIBLE);
         } else {
@@ -77,7 +60,7 @@ public class ListenersRecyclerViewAdapter extends RecyclerView.Adapter<Listeners
         }
 
         Log.d(TAG, "Reconnection - " + callerStateModelList.get(position).isReconnection());
-        if(callerStateModelList.get(position).isReconnection()) {
+        if (callerStateModelList.get(position).isReconnection()) {
             // show reconnection
             new Thread(new Runnable() {
                 @Override
@@ -85,8 +68,8 @@ public class ListenersRecyclerViewAdapter extends RecyclerView.Adapter<Listeners
                     try {
                         ShowActivity showActivity = (ShowActivity) context;
                         int blink = 0;
-                        while(blink <= 10) {
-                            if(blink % 2 == 0) {
+                        while (blink <= 10) {
+                            if (blink % 2 == 0) {
                                 showActivity.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -119,8 +102,8 @@ public class ListenersRecyclerViewAdapter extends RecyclerView.Adapter<Listeners
             // don't show reconnection
             holder.ivReconnection.setVisibility(View.GONE);
         }
-        
-        if(callerStateModelList.get(position).isQuestionState()) {
+
+        if (callerStateModelList.get(position).isQuestionState()) {
             holder.ivQuestion.setVisibility(View.VISIBLE);
 
         } else {
@@ -130,7 +113,7 @@ public class ListenersRecyclerViewAdapter extends RecyclerView.Adapter<Listeners
         holder.ivMuteUnmute.setEnabled(true);
         holder.cvListenerItemRow.setCardBackgroundColor(ContextCompat.getColor(context, R.color.colorCardViewNormal));
         /* mute un-mute handler */
-        if(callerStateModelList.get(position).isMuteUnmuteState()) {
+        if (callerStateModelList.get(position).isMuteUnmuteState()) {
             // mute
             holder.ivMuteUnmute.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.mute));
             holder.chronometerListenerItem.setVisibility(View.GONE);
@@ -149,10 +132,10 @@ public class ListenersRecyclerViewAdapter extends RecyclerView.Adapter<Listeners
                 Log.d(TAG, "position clicked: " + position);
                 holder.ivMuteUnmute.setEnabled(false);
                 holder.cvListenerItemRow.setCardBackgroundColor(ContextCompat.getColor(context, R.color.colorCardViewDisabled));
-                if(callerStateModelList.get(position).isMuteUnmuteState()) {
+                if (callerStateModelList.get(position).isMuteUnmuteState()) {
                     // mute - send unmute request
                     RequestMessageHelper.getInstance().unmute(callerStateModelList.get(position).getPhoneNum(), callerStateModelList.get(position).getTurn());
-                    callerStateModelList.get(position).setTurn(callerStateModelList.get(position).getTurn()+1);
+                    callerStateModelList.get(position).setTurn(callerStateModelList.get(position).getTurn() + 1);
                     callerStateModelList.get(position).setQuestionState(false);
                     callerStateModelList.get(position).setReconnection(false);
                     holder.ivQuestion.setVisibility(View.INVISIBLE);
@@ -167,6 +150,25 @@ public class ListenersRecyclerViewAdapter extends RecyclerView.Adapter<Listeners
     @Override
     public int getItemCount() {
         return callerStateModelList.size();
+    }
+
+    static class MyViewHolder extends RecyclerView.ViewHolder {
+        CardView cvListenerItemRow;
+        TextView tvListenerNumber;
+        ImageButton ivMuteUnmute;
+        ImageButton ivQuestion;
+        ImageView ivReconnection;
+        Chronometer chronometerListenerItem;
+
+        MyViewHolder(View itemView) {
+            super(itemView);
+            cvListenerItemRow = itemView.findViewById(R.id.cv_listener_item_row);
+            tvListenerNumber = itemView.findViewById(R.id.tv_listener_number);
+            ivMuteUnmute = itemView.findViewById(R.id.iv_mute_unmute);
+            ivQuestion = itemView.findViewById(R.id.iv_question);
+            ivReconnection = itemView.findViewById(R.id.iv_reconnection);
+            chronometerListenerItem = itemView.findViewById(R.id.chronometer_listener_item);
+        }
     }
 
 }

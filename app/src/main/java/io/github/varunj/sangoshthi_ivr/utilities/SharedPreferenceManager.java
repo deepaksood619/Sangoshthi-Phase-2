@@ -12,6 +12,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -27,27 +28,9 @@ import io.github.varunj.sangoshthi_ivr.models.TutorialListenModel;
 public class SharedPreferenceManager {
 
     private static final String TAG = SharedPreferenceManager.class.getSimpleName();
-
-    private SharedPreferences sharedPreferences;
     private static SharedPreferenceManager instance;
 
-    private String broadcaster = null;
-    private String cohortId = null;
-    private String cohortSize = null;
-    private String showId = null;
-    private String conferenceName = null;
-
-    private String tutorialsActivityData = null;
-    private String tutorialListenData = null;
-    private List<TutorialListenModel> tutorialListenModelList;
-    private JSONObject listenersData;
     private final String PREF_SHOW_PLAYBACK_MODEL = "show_playback_model";
-
-    /* only in local cache not in share preferences */
-    private boolean callReceived = false;
-    private boolean showRunning = false;
-    private boolean showUpdateStatus = false;
-
     private final String PREF_IS_LOGGED_IN = "is_logged_in";
     private final String PREF_BROADCASTER = "broadcaster";
     private final String PREF_COHORT_ID = "cohort_id";
@@ -61,6 +44,23 @@ public class SharedPreferenceManager {
     private final String PREF_SHOW_CHRONOMETER_TIME = "show_chronometer_time";
     private final String PREF_LISTENERS_DATA = "listeners_data";
     private final String PREF_SHOW_LIST_DATA = "show_list_data";
+
+    private SharedPreferences sharedPreferences;
+    private String broadcaster = null;
+    private String cohortId = null;
+    private String cohortSize = null;
+    private String showId = null;
+    private String conferenceName = null;
+    private String tutorialsActivityData = null;
+    private String tutorialListenData = null;
+    private JSONObject listenersData;
+
+    /* only in local cache not in share preferences */
+    private boolean callReceived = false;
+    private boolean showRunning = false;
+    private boolean showUpdateStatus = false;
+
+    private List<TutorialListenModel> tutorialListenModelList;
     private ArrayList<ShowPlaybackModel> showPlaybackModels;
     private ArrayList<ShowModel> showModelArrayList;
 
@@ -245,6 +245,7 @@ public class SharedPreferenceManager {
         setTutorialListenData(gson.toJson(tutorialListenModelList));
     }
 
+    // {"Deepika Yadav":"9716517818"}
     public void setListenersData(String listenersData) {
         try {
             Log.d(TAG, "listeners data - " + listenersData);
@@ -260,10 +261,29 @@ public class SharedPreferenceManager {
             if (this.listenersData == null)
                 listenersData = new JSONObject(sharedPreferences.getString(PREF_LISTENERS_DATA, ""));
 
-            return listenersData.getString(phoneNum);
+            Log.d(TAG, "getListenersData " + listenersData + " phoneNum " + phoneNum);
+
+            JSONArray keys = listenersData.names();
+
+            Log.d(TAG, "keys - " + keys);
+
+            for (int i = 0; i < keys.length(); ++i) {
+                String key = keys.getString(i);
+                String value = listenersData.getString(key);
+
+                Log.d(TAG, "key - " + key + ", value - " + value);
+
+                if (value.equals(phoneNum)) {
+                    return key + " | " + phoneNum.substring(phoneNum.length() - 3);
+                }
+            }
+
         } catch (JSONException e) {
-            Log.e(TAG, "listeners data exception - " + e);
+            Log.e(TAG, "listeners data JSONException - " + e);
+        } catch (Exception ex) {
+            Log.e(TAG, "listeners data Exception - " + ex);
         }
+
         return phoneNum;
     }
 
