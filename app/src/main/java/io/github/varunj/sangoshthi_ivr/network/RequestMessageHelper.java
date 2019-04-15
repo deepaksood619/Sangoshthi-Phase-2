@@ -95,14 +95,14 @@ public class RequestMessageHelper {
      * Request - {"objective":"get_final_feedback_for_show","broadcaster":"7011030818","cohort_id":"15","timestamp":"2019-03-07 22:12:08","update":"yes","show_id":"show_32"}
      * Response - {"objective":"get_final_feedback_for_show_ack","show_id":"show_32"}
      */
-    public void getFinalFeedbackForShow() {
+    public void getFinalFeedbackForShow(String update_val) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("objective", "get_final_feedback_for_show");
             jsonObject.put("broadcaster", SharedPreferenceManager.getInstance().getBroadcaster());
             jsonObject.put("cohort_id", SharedPreferenceManager.getInstance().getCohortId());
             jsonObject.put("timestamp", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).format(Calendar.getInstance().getTime()));
-            jsonObject.put("update", "yes");
+            jsonObject.put("update", update_val);
             jsonObject.put("show_id", SharedPreferenceManager.getInstance().getShowId());
             AMQPPublish.getInstance().publishMessage(jsonObject);
         } catch (JSONException e) {
@@ -110,6 +110,24 @@ public class RequestMessageHelper {
         }
     }
 
+    /**
+     * Request - {"objective":"call_quality_update","broadcaster":"8368861819","cohort_id":"[63]","show_id":"show_136","conference_name":"EMPTY","update":"no"}
+     * Response - {"objective":"configuration_data","cohort_id":[63],"cohort_size":"1"}
+     */
+    public void getCallQualityUpdate(String update_val) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("objective", "call_quality_update");
+            jsonObject.put("broadcaster", SharedPreferenceManager.getInstance().getBroadcaster());
+            jsonObject.put("cohort_id", SharedPreferenceManager.getInstance().getCohortId());
+            jsonObject.put("show_id", SharedPreferenceManager.getInstance().getShowId());
+            jsonObject.put("conference_name", SharedPreferenceManager.getInstance().getConferenceName());
+            jsonObject.put("update", update_val);
+            AMQPPublish.getInstance().publishMessage(jsonObject);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * {"objective":"start_show",

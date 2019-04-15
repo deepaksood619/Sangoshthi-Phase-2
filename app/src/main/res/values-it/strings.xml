@@ -28,6 +28,7 @@
     <string name="btn_show_play_pause_question_answer_resume">Resume</string>
     <string name="btn_start_show">Start</string>
     <string name="btn_yes">YES</string>
+    <string name="btn_flush">Flush</string>
     <string name="cd_btn_start_show">Start Show</string>
     <string name="cd_ib_call_broadcaster">Call broadcaster</string>
     <string name="cd_image">Image</string>
@@ -37,6 +38,7 @@
     <string name="cd_iv_question">Question Asked</string>
     <string name="dialog_box_end_show_message">Do you want to end show</string>
     <string name="dialog_box_end_show_title">End Show</string>
+    <string name="dialog_box_consider_for_analysis">Analysis</string>
     <string name="dialog_box_update_show_status_message">If you are ready for the next show, then press yes. Otherwise press no.</string>
     <string name="dialog_box_update_show_status_title">Show End Confirmation</string>
     <string name="dialog_box_feedback_show_status_title">Have you completed the show?</string>
@@ -75,5 +77,6 @@
     <string name="toast_state_not_changed">State not changed</string>
     <string name="toast_pause_fully_play_error">Pause or fully play the current audio</string>
     <string name="toast_unlock_error">Next will unlock after this audio is once played fully</string>
+    <string name="toast_unavailable_show_clikced">Status update</string>
     <string name="login_phone_error">Please enter a valid phone number</string>
 </resources>

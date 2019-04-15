@@ -1,8 +1,11 @@
 package io.github.varunj.sangoshthi_ivr.activities;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,6 +27,7 @@ import io.github.varunj.sangoshthi_ivr.models.ShowModel;
 import io.github.varunj.sangoshthi_ivr.network.RequestMessageHelper;
 import io.github.varunj.sangoshthi_ivr.network.ResponseMessageHelper;
 import io.github.varunj.sangoshthi_ivr.utilities.LoadingUtil;
+import io.github.varunj.sangoshthi_ivr.utilities.SharedPreferenceManager;
 
 public class SelectionActivity extends AppCompatActivity {
 
@@ -105,6 +109,46 @@ public class SelectionActivity extends AppCompatActivity {
         if (showModelArrayList.size() > 0) {
             tvNoShow.setVisibility(View.INVISIBLE);
             mAdapter.notifyDataSetChanged();
+        }
+    }
+
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume()");
+        Log.d(TAG, "isShowUpdateStatus " + SharedPreferenceManager.getInstance().isShowUpdateStatus());
+        if (SharedPreferenceManager.getInstance().isShowUpdateStatus()) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(R.string.dialog_box_consider_for_analysis)
+                    .setCancelable(false);
+
+            builder.setPositiveButton(R.string.btn_yes, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    RequestMessageHelper.getInstance().getCallQualityUpdate("yes");
+                    SharedPreferenceManager.getInstance().setShowUpdateStatus(false);
+                }
+            });
+
+            builder.setNegativeButton(R.string.btn_no, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    RequestMessageHelper.getInstance().getCallQualityUpdate("no");
+                    dialogInterface.cancel();
+                    SharedPreferenceManager.getInstance().setShowUpdateStatus(false);
+                }
+            });
+
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        }
+
+        Log.d(TAG, "isShowRunning " + SharedPreferenceManager.getInstance().isShowRunning());
+
+        if (SharedPreferenceManager.getInstance().isShowRunning()) {
+            // if show is running then resume the already running show and send the resume packet
+            Log.d(TAG, "Show already running, redirecting to ShowActivity");
+            Intent intentResumeShow = new Intent(this, ShowActivity.class);
+            startActivity(intentResumeShow);
         }
     }
 

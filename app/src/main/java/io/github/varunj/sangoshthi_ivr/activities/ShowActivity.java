@@ -63,6 +63,7 @@ public class ShowActivity extends AppCompatActivity implements View.OnClickListe
     private ListenersRecyclerViewAdapter mAdapter;
     private List<CallerStateModel> callerStateModelList;
     private ArrayList<ShowPlaybackModel> showPlaybackModels;
+    private Button flushButton;
 
     // it follows 0 based indexing, 0 is the first item that is played
     private int currentPlayingIndex;
@@ -77,6 +78,9 @@ public class ShowActivity extends AppCompatActivity implements View.OnClickListe
 
         chronometerShow = findViewById(R.id.chronometer_show);
         chronometerShow.start();
+
+        flushButton = findViewById(R.id.flush_button);
+        flushButton.setOnClickListener(this);
 
         showEndShow = findViewById(R.id.show_end_show);
         showEndShow.setOnClickListener(this);
@@ -142,6 +146,13 @@ public class ShowActivity extends AppCompatActivity implements View.OnClickListe
                             finish();
                             break;
 
+//                        case "call_quality_update":
+//                            LoadingUtil.getInstance().hideLoading();
+//                            if (chronometerShow != null)
+//                                chronometerShow.stop();
+//                            finish();
+//                            break;
+
                         default:
                             Log.e(TAG, "objective not matched in ShowActivity" + jsonObject.toString());
                     }
@@ -150,6 +161,7 @@ public class ShowActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         };
+
         ResponseMessageHelper.getInstance().subscribeToResponse(incomingMessageHandler);
 
         RequestMessageHelper.getInstance().showPlaybackMetadata();
@@ -323,6 +335,11 @@ public class ShowActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btn_next_content:
                 handleNextButton();
+                break;
+
+            case R.id.flush_button:
+                /*  addition functionality of Flush callers added ===== NOT TESTED YET   */
+                RequestMessageHelper.getInstance().flushCallers();
                 break;
 
             default:

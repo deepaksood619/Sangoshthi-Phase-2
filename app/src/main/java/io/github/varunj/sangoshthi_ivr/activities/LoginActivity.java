@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final int PERMISSION_CALLBACK_CONSTANT = 43;
 
     String[] permissionsRequired = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_PHONE_STATE};
+            Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_CALL_LOG};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,10 +72,9 @@ public class LoginActivity extends AppCompatActivity {
      * if not available, then get the permission from user.
      */
     private void checkAndGetRuntimePermissions() {
-        if (ContextCompat.checkSelfPermission(this,
-                permissionsRequired[0])
-                != PackageManager.PERMISSION_GRANTED ||
-                ContextCompat.checkSelfPermission(this, permissionsRequired[1]) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, permissionsRequired[0]) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(this, permissionsRequired[1]) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(this, permissionsRequired[2]) != PackageManager.PERMISSION_GRANTED) {
 
             ActivityCompat.requestPermissions(this,
                     permissionsRequired,

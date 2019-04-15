@@ -1,35 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_margin="5dp">
+    android:layout_margin="5dp"
+    android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:id="@+id/relativeLayout">
+        android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/tv_num_of_listeners"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/placeholder_tv_num_of_listeners"
-            android:textSize="25sp"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:textStyle="bold"
-            android:layout_centerVertical="true"/>
+            android:gravity="center"
+            android:orientation="horizontal">
 
-        <Chronometer
-            android:id="@+id/chronometer_show"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:textSize="25sp"/>
+            <TextView
+                android:id="@+id/tv_num_of_listeners"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="@string/placeholder_tv_num_of_listeners"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/flush_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@color/home_host_show"
+                android:text="@string/btn_flush"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                android:visibility="invisible" />
+
+            <Chronometer
+                android:id="@+id/chronometer_show"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:textSize="25sp" />
+        </LinearLayout>
 
     </RelativeLayout>
 
@@ -38,14 +57,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/relativeLayout"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="12dp">
 
         <ImageButton
             android:id="@+id/btn_previous_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:background="@android:color/transparent"
             android:contentDescription="@string/cd_image"
@@ -90,28 +109,29 @@
 
     </RelativeLayout>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_listeners_content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            android:padding="5dp"
-            android:scrollbars="vertical"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/ll_media_controls"
-            android:layout_above="@+id/show_end_show" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_listeners_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/show_end_show"
+        android:layout_below="@+id/ll_media_controls"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="-1dp"
+        android:padding="5dp"
+        android:scrollbars="vertical" />
 
-        <ImageButton
-            android:id="@+id/show_end_show"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_marginBottom="20dp"
-            android:src="@drawable/show_end_show"
-            android:scaleType="fitCenter"
-            android:background="@android:color/transparent"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:contentDescription="@string/cd_image"/>
+    <ImageButton
+        android:id="@+id/show_end_show"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/cd_image"
+        android:scaleType="fitCenter"
+        android:src="@drawable/show_end_show" />
 
 </RelativeLayout>
