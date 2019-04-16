@@ -13,7 +13,7 @@
 
     <string name="show_play_pause">रोकें/चलाएँ</string>
 
-    <string name="btn_show_feedback">Feeback</string>
+    <string name="btn_show_feedback">अपडेट करें</string>
     <string name="btn_show_play_pause_feedback_play">डॉक्टर की राय  सुने</string>
     <string name="btn_show_play_pause_feedback_pause">रोकें</string>
     <string name="btn_show_play_pause_feedback_resume">चलाएँ</string>
