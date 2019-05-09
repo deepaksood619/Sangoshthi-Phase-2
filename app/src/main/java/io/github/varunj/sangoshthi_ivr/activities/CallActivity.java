@@ -85,6 +85,8 @@ public class CallActivity extends AppCompatActivity {
                 if (tvCall.getText().equals(getResources().getString(R.string.btn_call_broadcaster))) {
                     RequestMessageHelper.getInstance().startShow();
 
+                    RequestMessageHelper.getInstance().showPlaybackMetadata();
+
                     progressDialog.show();
                     callStarted = true;
                     if (dismissThreadCall != null)

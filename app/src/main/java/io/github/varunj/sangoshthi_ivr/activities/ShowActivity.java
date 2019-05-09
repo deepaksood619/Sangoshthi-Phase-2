@@ -107,6 +107,8 @@ public class ShowActivity extends AppCompatActivity implements View.OnClickListe
         rvListenersContent.setItemAnimator(new DefaultItemAnimator());
         rvListenersContent.setAdapter(mAdapter);
 
+        handleShowPlaybackMetadataResponse();
+
         final Handler incomingMessageHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -117,10 +119,6 @@ public class ShowActivity extends AppCompatActivity implements View.OnClickListe
                     switch (jsonObject.getString("objective")) {
                         case "conf_member_status":
                             handleConfMemberStatus(jsonObject);
-                            break;
-
-                        case "show_playback_metadata_response":
-                            handleShowPlaybackMetadataResponse(jsonObject);
                             break;
 
                         case "media_stopped":
@@ -163,8 +161,6 @@ public class ShowActivity extends AppCompatActivity implements View.OnClickListe
         };
 
         ResponseMessageHelper.getInstance().subscribeToResponse(incomingMessageHandler);
-
-        RequestMessageHelper.getInstance().showPlaybackMetadata();
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.progress_dialog_reconnecting_call));
@@ -232,7 +228,7 @@ public class ShowActivity extends AppCompatActivity implements View.OnClickListe
         return count;
     }
 
-    private void handleShowPlaybackMetadataResponse(JSONObject jsonObject) {
+    private void handleShowPlaybackMetadataResponse() {
         Log.d(TAG, "handleShowPlaybackMetadataResponse function called");
 
         showPlaybackModels = SharedPreferenceManager.getInstance().getShowPlaybackModels();

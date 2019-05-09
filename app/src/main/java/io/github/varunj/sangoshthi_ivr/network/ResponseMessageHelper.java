@@ -179,8 +179,6 @@ public class ResponseMessageHelper {
         }
 
         SharedPreferenceManager.getInstance().setShowPlaybackModels(showPlaybackModels);
-
-        sendCallbackToActivity(message);
     }
 
     private void handleDialListenersResponse(JSONObject message) throws JSONException {
